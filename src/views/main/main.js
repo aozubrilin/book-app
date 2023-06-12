@@ -7,6 +7,7 @@ import { CardList } from '../../components/card-list/card-list.js';
 export class MainView extends AbstractView {
   state = {
     list: [],
+    numFound: 0,
     loading: false,
     searchQuery: undefined,
     offset: 0,
@@ -22,7 +23,7 @@ export class MainView extends AbstractView {
 
   appStateHook(path) {
     if (path === 'favorites') {
-      console.log(path);
+      this.render();
     }
   }
 
@@ -34,6 +35,7 @@ export class MainView extends AbstractView {
         this.state.offset
       );
       this.state.loading = false;
+      this.state.numFound = data.numFound;
       this.state.list = data.docs;
     }
     if (path === 'list' || path === 'loading') {
